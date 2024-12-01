@@ -8,32 +8,13 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"github.com/yagoernandes/testes-ebitengine/entities"
 )
 
-type Sprite struct {
-	Img  *ebiten.Image
-	X, Y float64
-}
-
-type Player struct {
-	*Sprite
-	Health uint
-}
-
-type Enemy struct {
-	*Sprite
-	FollowsPlayer bool
-}
-
-type Potion struct {
-	*Sprite
-	AmountHeal uint
-}
-
 type Game struct {
-	player      *Player
-	enemies     []*Enemy
-	potions     []*Potion
+	player      *entities.Player
+	enemies     []*entities.Enemy
+	potions     []*entities.Potion
 	tilemapJSON *TilemapJSON
 	tilemapImg  *ebiten.Image
 }
@@ -185,17 +166,17 @@ func main() {
 	}
 
 	if err := ebiten.RunGame(&Game{
-		player: &Player{
-			Sprite: &Sprite{
+		player: &entities.Player{
+			Sprite: &entities.Sprite{
 				Img: ninjaImage,
 				X:   100,
 				Y:   100,
 			},
 			Health: 100,
 		},
-		enemies: []*Enemy{
+		enemies: []*entities.Enemy{
 			{
-				Sprite: &Sprite{
+				Sprite: &entities.Sprite{
 					Img: skeletonImage,
 					X:   200,
 					Y:   200,
@@ -203,7 +184,7 @@ func main() {
 				FollowsPlayer: true,
 			},
 			{
-				Sprite: &Sprite{
+				Sprite: &entities.Sprite{
 					Img: skeletonImage,
 					X:   150,
 					Y:   100,
@@ -211,7 +192,7 @@ func main() {
 				FollowsPlayer: false,
 			},
 			{
-				Sprite: &Sprite{
+				Sprite: &entities.Sprite{
 					Img: skeletonImage,
 					X:   50,
 					Y:   200,
@@ -219,9 +200,9 @@ func main() {
 				FollowsPlayer: true,
 			},
 		},
-		potions: []*Potion{
+		potions: []*entities.Potion{
 			{
-				Sprite: &Sprite{
+				Sprite: &entities.Sprite{
 					Img: potionImage,
 					X:   100,
 					Y:   75,
@@ -229,7 +210,7 @@ func main() {
 				AmountHeal: 10,
 			},
 			{
-				Sprite: &Sprite{
+				Sprite: &entities.Sprite{
 					Img: potionImage,
 					X:   50,
 					Y:   100,
